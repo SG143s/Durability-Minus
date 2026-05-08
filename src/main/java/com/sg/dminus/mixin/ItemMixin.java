@@ -1,5 +1,6 @@
 package com.sg.dminus.mixin;
 
+import com.sg.dminus.config.ConfigManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,6 +28,9 @@ public class ItemMixin {
             cancellable = true
     )
     private void degradingMiningSpeed(ItemStack stack, BlockState state, CallbackInfoReturnable<Float> cir) {
+        if(!ConfigManager.get().enableTools) {
+            return;
+        }
 
         if (stack.isDamageable()) {
             float baseSpeed = cir.getReturnValue();

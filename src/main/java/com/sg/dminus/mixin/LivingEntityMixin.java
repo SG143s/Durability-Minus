@@ -1,6 +1,7 @@
 package com.sg.dminus.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.sg.dminus.config.ConfigManager;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -32,7 +33,7 @@ public abstract class LivingEntityMixin {
 
         double base = this.getAttributeBaseValue(EntityAttributes.ARMOR);
 
-        if (original > base) {
+        if (original > base && ConfigManager.get().enableArmor) {
             LOGGER.info("[ArmorMixin] original={}", original);
             LivingEntity entity = (LivingEntity)(Object)this;
             if (entity instanceof PlayerEntity player) {
@@ -55,7 +56,7 @@ public abstract class LivingEntityMixin {
 
         double base = this.getAttributeBaseValue(EntityAttributes.ARMOR_TOUGHNESS);
 
-        if (original > base) {
+        if (original > base && ConfigManager.get().enableArmor) {
             LOGGER.info("[ToughnessMixin] original={}", original);
             LivingEntity entity = (LivingEntity)(Object)this;
             if (entity instanceof PlayerEntity player) {

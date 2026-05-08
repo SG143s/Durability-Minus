@@ -1,6 +1,7 @@
 package com.sg.dminus.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.sg.dminus.config.ConfigManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class PlayerEntityMixin {
     private double modifyAttackDamage(double original) {
         PlayerEntity entity = (PlayerEntity)(Object)this;
         ItemStack stack = entity.getWeaponStack();
-        if (!stack.isEmpty()) {
+        if (!stack.isEmpty() && ConfigManager.get().enableMeleeWeapon) {
             double weaponBase = getWeaponBase(stack);
             if (weaponBase > 0.0) {
                 ensureInit(stack);

@@ -1,5 +1,6 @@
 package com.sg.dminus.mixin;
 
+import com.sg.dminus.config.ConfigManager;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.RangedWeaponItem;
@@ -40,6 +41,9 @@ public class RangedWeaponItemMixin {
                                             float divergence,
                                             boolean critical,
                                             @Nullable LivingEntity target) {
+        if(!ConfigManager.get().enableRangedWeapon) {
+            return original;
+        }
         ensureInit(stack);
         float result = Math.max(0.1f, DegradeCalc(
                 stack.getOrDefault(PERFORMANCE_PENALTY_PERCENTAGE, PerformancePenaltyCalc(stack)),

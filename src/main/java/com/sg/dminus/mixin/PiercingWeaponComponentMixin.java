@@ -1,5 +1,6 @@
 package com.sg.dminus.mixin;
 
+import com.sg.dminus.config.ConfigManager;
 import net.minecraft.component.type.PiercingWeaponComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -27,7 +28,7 @@ public class PiercingWeaponComponentMixin {
     )
     private float modifyBaseAttack(float original, LivingEntity attacker, EquipmentSlot slot) {
         ItemStack stack = attacker.getWeaponStack();
-        if (!stack.isEmpty()) {
+        if (!stack.isEmpty() && ConfigManager.get().enableSpears) {
             float weaponBase = (float) getWeaponBase(stack);
             if (weaponBase > 0.0f) {
                 ensureInit(stack);

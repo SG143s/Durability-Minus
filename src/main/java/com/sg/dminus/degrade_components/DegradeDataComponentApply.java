@@ -1,5 +1,6 @@
 package com.sg.dminus.degrade_components;
 
+import com.sg.dminus.config.ConfigManager;
 import com.sg.dminus.degrade_data.DegradeRegistry;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.minecraft.component.DataComponentTypes;
@@ -17,10 +18,10 @@ public class DegradeDataComponentApply {
                             (builder, item) -> {
                                 if (builder.contains(DataComponentTypes.MAX_DAMAGE)) {
                                     if (!builder.contains(DEGRADE_RATIO)) {
-                                        builder.add(DEGRADE_RATIO, 100f);
+                                        builder.add(DEGRADE_RATIO, ConfigManager.get().defaultRatio);
                                     }
                                     if (!builder.contains(DEFAULT_DEGRADE_RATIO)) {
-                                        builder.add(DEFAULT_DEGRADE_RATIO, 100f);
+                                        builder.add(DEFAULT_DEGRADE_RATIO, ConfigManager.get().defaultRatio);
                                     }
                                     if (!builder.contains(DegradeDataComponents.PERFORMANCE_PENALTY_PERCENTAGE)) {
                                         builder.add(DegradeDataComponents.PERFORMANCE_PENALTY_PERCENTAGE, 0f);

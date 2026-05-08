@@ -1,5 +1,6 @@
 package com.sg.dminus.mixin;
 
+import com.sg.dminus.config.ConfigManager;
 import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,9 @@ public abstract class TridentEntityMixin {
             constant = @Constant(floatValue = 8.0f)
     )
     private float modifyBaseThrownTridentDamage(float original) {
+        if(!ConfigManager.get().enableTrident) {
+            return original;
+        }
         TridentEntity entity = (TridentEntity) (Object) this;
         ItemStack stack = entity.getWeaponStack();
         ensureInit(stack);

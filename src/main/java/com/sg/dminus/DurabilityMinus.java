@@ -1,5 +1,6 @@
 package com.sg.dminus;
 
+import com.sg.dminus.config.ConfigManager;
 import com.sg.dminus.degrade_data.DegradeRegistry;
 import com.sg.dminus.degrade_data.data_loader.GroupDataLoader;
 import com.sg.dminus.degrade_data.data_loader.SingleDataLoader;
@@ -46,6 +47,7 @@ public class DurabilityMinus implements ModInitializer {
 								Identifier.of(MOD_ID, "degrade_group_loader"),
 								new GroupDataLoader()
 						);
+		ConfigManager.load();
 
 		LOGGER.info("Hello Fabric world!");
 	}
