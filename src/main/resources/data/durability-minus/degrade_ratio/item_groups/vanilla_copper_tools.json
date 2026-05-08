@@ -1,0 +1,11 @@
+{
+  "items": [
+    "minecraft:copper_sword",
+    "minecraft:copper_shovel",
+    "minecraft:copper_axe",
+    "minecraft:copper_pickaxe",
+    "minecraft:copper_hoe",
+    "minecraft:copper_spear"
+  ],
+  "degrade_value": 60.00
+}

@@ -1,0 +1,9 @@
+{
+  "items": [
+    "minecraft:copper_helmet",
+    "minecraft:copper_chestplate",
+    "minecraft:copper_leggings",
+    "minecraft:copper_boots"
+  ],
+  "degrade_value": 60.00
+}

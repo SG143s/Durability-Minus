@@ -1,0 +1,9 @@
+{
+  "items": [
+    "minecraft:leather_helmet",
+    "minecraft:leather_chestplate",
+    "minecraft:leather_leggings",
+    "minecraft:leather_boots"
+  ],
+  "degrade_value": 50.00
+}

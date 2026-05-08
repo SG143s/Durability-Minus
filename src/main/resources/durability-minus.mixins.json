@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "package": "com.sg.dminus.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ExperienceOrbEntityMixin",
+    "ItemMixin",
+    "ItemStackMixin",
+    "KineticWeaponComponentMixin",
+    "LivingEntityMixin",
+    "MobEntityMixin",
+    "PiercingWeaponComponentMixin",
+    "PlayerEntityMixin",
+    "RangedWeaponItemMixin",
+    "TridentEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+	}
+}
