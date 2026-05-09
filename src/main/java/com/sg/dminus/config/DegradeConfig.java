@@ -1,8 +1,8 @@
 package com.sg.dminus.config;
 
-public class ModConfig {
+public class DegradeConfig {
 
-    public float defaultRatio = 100.0f;
+    public static float defaultRatio = 100.0f;
 
     public boolean enableSpears = true;
 
@@ -17,4 +17,6 @@ public class ModConfig {
     public boolean enableTrident = true;
 
     public boolean enableRangedWeapon = true;
+
+    public static float[] resilienceLevelModifier = {0.9f, 0.75f, 0.5f};
 }

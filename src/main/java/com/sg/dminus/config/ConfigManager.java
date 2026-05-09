@@ -21,7 +21,7 @@ public class ConfigManager {
                     .getConfigDir()
                     .resolve("durability_minus.json");
 
-    private static ModConfig config;
+    private static DegradeConfig config;
 
     public static void load() {
 
@@ -29,19 +29,19 @@ public class ConfigManager {
 
             try (Reader reader = Files.newBufferedReader(CONFIG_PATH)) {
 
-                config = GSON.fromJson(reader, ModConfig.class);
+                config = GSON.fromJson(reader, DegradeConfig.class);
 
             } catch (Exception e) {
 
                 e.printStackTrace();
 
-                config = new ModConfig();
+                config = new DegradeConfig();
                 save();
             }
 
         } else {
 
-            config = new ModConfig();
+            config = new DegradeConfig();
             save();
         }
     }
@@ -63,7 +63,7 @@ public class ConfigManager {
         }
     }
 
-    public static ModConfig get() {
+    public static DegradeConfig get() {
         return config;
     }
 }

@@ -1,8 +1,14 @@
 package com.sg.dminus.degrade_funcs;
 
+import com.sg.dminus.config.DegradeConfig;
+import com.sg.dminus.enchantment.DegradeEnchantment;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 
 import static com.sg.dminus.degrade_components.DegradeDataComponentApply.ensureInit;
 import static com.sg.dminus.degrade_components.DegradeDataComponents.DEGRADE_RATIO;
@@ -19,11 +25,23 @@ public class DegradeMath {
     }
 
     public static float PerformancePenaltyCalc(ItemStack stack) {
-        return PerformancePenaltyCalc(
+        float penalty = PerformancePenaltyCalc(
                 stack.getMaxDamage(),
                 stack.getDamage(),
-                stack.getOrDefault(DEGRADE_RATIO, 100f)
+                stack.getOrDefault(DEGRADE_RATIO, DegradeConfig.defaultRatio)
         );
+        float multiplier = 1.0f;
+        for (Object2IntMap.Entry<RegistryEntry<Enchantment>> entry : stack.getEnchantments().getEnchantmentEntries()) {
+            if (entry.getKey().matchesKey(DegradeEnchantment.RESILIENCE)) {
+                multiplier = switch (entry.getIntValue()) {
+                    case 1 -> DegradeConfig.resilienceLevelModifier[0];
+                    case 2 -> DegradeConfig.resilienceLevelModifier[1];
+                    default -> DegradeConfig.resilienceLevelModifier[2];
+                };
+                break;
+            }
+        }
+        return penalty * multiplier;
     }
 
     private static float PerformancePenaltyCalc(int maxDamage, int currentDamage, float degradeRatio) {

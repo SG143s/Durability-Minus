@@ -9,8 +9,6 @@ import com.sg.dminus.degrade_components.DegradeDataComponents;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
-import net.fabricmc.fabric.api.resource.v1.reloader.SimpleResourceReloader;
-import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.resource.SynchronousResourceReloader;
 import net.minecraft.util.Identifier;
