@@ -4,7 +4,6 @@ import com.sg.dminus.config.DegradeConfig;
 import com.sg.dminus.enchantment.DegradeEnchantment;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

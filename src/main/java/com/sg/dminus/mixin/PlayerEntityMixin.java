@@ -4,23 +4,17 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.sg.dminus.config.ConfigManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 import static com.sg.dminus.degrade_components.DegradeDataComponentApply.ensureInit;
 import static com.sg.dminus.degrade_components.DegradeDataComponents.PERFORMANCE_PENALTY_PERCENTAGE;
 import static com.sg.dminus.degrade_funcs.DegradeGetValue.getWeaponBase;
 import static com.sg.dminus.degrade_funcs.DegradeMath.DegradeCalc;
 import static com.sg.dminus.degrade_funcs.DegradeMath.PerformancePenaltyCalc;
-import static net.minecraft.entity.attribute.EntityAttributes.ATTACK_DAMAGE;
 
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin {
-    @Unique
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger("durability-minus");
     @ModifyExpressionValue(
             method = "attack",
             at = @At(
@@ -37,9 +31,7 @@ public class PlayerEntityMixin {
                 double scaledWeapon = DegradeCalc(stack.getOrDefault(PERFORMANCE_PENALTY_PERCENTAGE, PerformancePenaltyCalc(stack)), (float)weaponBase, 0.5f);
                 scaledWeapon = Math.max(0.5, scaledWeapon);
 
-                double result = original - weaponBase + scaledWeapon;
-                LOGGER.info("Result: {}", result);
-                return result;
+                return original - weaponBase + scaledWeapon;
             }
         }
         return original;

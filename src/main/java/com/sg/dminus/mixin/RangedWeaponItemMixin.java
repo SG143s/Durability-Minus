@@ -7,9 +7,7 @@ import net.minecraft.item.RangedWeaponItem;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import org.jspecify.annotations.Nullable;
-import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
@@ -23,8 +21,6 @@ import static com.sg.dminus.degrade_funcs.DegradeMath.PerformancePenaltyCalc;
 
 @Mixin(RangedWeaponItem.class)
 public class RangedWeaponItemMixin {
-    @Unique
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger("durability-minus");
     @ModifyVariable(
             method = "shootAll",
             at = @At("HEAD"),
@@ -45,12 +41,10 @@ public class RangedWeaponItemMixin {
             return original;
         }
         ensureInit(stack);
-        float result = Math.max(0.1f, DegradeCalc(
+        return Math.max(0.1f, DegradeCalc(
                 stack.getOrDefault(PERFORMANCE_PENALTY_PERCENTAGE, PerformancePenaltyCalc(stack)),
                 original,
                 0.1f
         ));
-        LOGGER.info("Result: {}", result );
-        return result;
     }
 }

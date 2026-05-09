@@ -10,8 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
 
-import static com.sg.dminus.degrade_components.DegradeDataComponents.PERFORMANCE_PENALTY_PERCENTAGE;
-
 public class DegradeGetValue {
     public static double getWeaponBase(ItemStack stack) {
         double weaponBase = 0.0;
@@ -73,18 +71,5 @@ public class DegradeGetValue {
         }
 
         return Math.max(0.0, armorBase);
-    }
-
-    // In DegradeMath or a utility class
-    public static void initPenaltyIfAbsent(ItemStack stack) {
-        if (stack.isEmpty()) return;
-        if (!stack.isDamageable()) return;
-        if (stack.contains(PERFORMANCE_PENALTY_PERCENTAGE)) return;
-
-        int currentDamage = stack.getDamage();
-        if (currentDamage <= 0) return;
-
-        float wearRatio = (float) currentDamage / (float) stack.getMaxDamage();
-        stack.set(PERFORMANCE_PENALTY_PERCENTAGE, wearRatio);
     }
 }

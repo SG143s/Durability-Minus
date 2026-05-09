@@ -1,7 +1,5 @@
 package com.sg.dminus.mixin;
 
-import net.minecraft.component.ComponentMap;
-import net.minecraft.component.ComponentType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
@@ -17,20 +15,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static com.sg.dminus.degrade_components.DegradeDataComponents.DEGRADE_RATIO;
+
 import static com.sg.dminus.degrade_components.DegradeDataComponents.PERFORMANCE_PENALTY_PERCENTAGE;
 import static com.sg.dminus.degrade_funcs.DegradeMath.PerformancePenaltyCalc;
 import static com.sg.dminus.degrade_components.DegradeDataComponentApply.ensureInit;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
-    @Shadow @Nullable public abstract <T> T set(ComponentType<T> type, @Nullable T value);
-
-    @Shadow public abstract int getMaxDamage();
-
-    @Shadow public abstract int getDamage();
-
-    @Shadow public abstract ComponentMap getComponents();
 
     @Shadow
     @Deprecated
