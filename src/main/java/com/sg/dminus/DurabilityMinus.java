@@ -30,18 +30,19 @@ public class DurabilityMinus implements ModInitializer {
 		// Proceed with mild caution.
 		DegradeDataComponents.init();
 		DegradeDataComponentApply.apply();
+
 		ResourceLoader.get(PackType.SERVER_DATA)
-				.registerReloader(
+				.registerReloadListener(
 						Identifier.fromNamespaceAndPath(MOD_ID, "clear_registry"),
 						(ResourceManagerReloadListener) manager -> DegradeRegistry.clear()
 				);
 		ResourceLoader.get(PackType.SERVER_DATA)
-						.registerReloader(
+						.registerReloadListener(
 								Identifier.fromNamespaceAndPath(MOD_ID, "degrade_single_loader"),
 								new SingleDataLoader()
 						);
 		ResourceLoader.get(PackType.SERVER_DATA)
-						.registerReloader(
+						.registerReloadListener(
 								Identifier.fromNamespaceAndPath(MOD_ID, "degrade_group_loader"),
 								new GroupDataLoader()
 						);

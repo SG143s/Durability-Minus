@@ -53,9 +53,9 @@ public class DegradeMath {
         double totalBase = 0.0;
 
         for (EquipmentSlot slot : EquipmentSlot.values()) {
-            if (!slot.isArmorSlot()) continue;
+            if (!slot.isArmor()) continue;
 
-            ItemStack stack = player.getEquippedStack(slot);
+            ItemStack stack = player.getItemBySlot(slot);
             if (stack.isEmpty()) continue;
 
             double base = (type == 0)
