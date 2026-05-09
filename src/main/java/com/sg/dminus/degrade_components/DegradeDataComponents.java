@@ -1,47 +1,47 @@
 package com.sg.dminus.degrade_components;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.component.ComponentType;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.Identifier;
 
 public final class DegradeDataComponents {
-    public static final ComponentType<Float> DEGRADE_RATIO =
+    public static final DataComponentType<Float> DEGRADE_RATIO =
             Registry.register(
-                    Registries.DATA_COMPONENT_TYPE,
-                    Identifier.of("durability_minus", "degrade_ratio"),
-                    ComponentType.<Float>builder()
-                            .codec(Codec.FLOAT)
-                            .packetCodec(PacketCodecs.FLOAT)
+                    BuiltInRegistries.DATA_COMPONENT_TYPE,
+                    Identifier.fromNamespaceAndPath("durability_minus", "degrade_ratio"),
+                    DataComponentType.<Float>builder()
+                            .persistent(Codec.FLOAT)
+                            .networkSynchronized(ByteBufCodecs.FLOAT)
                             .build()
             );
-    public static final ComponentType<Float> DEFAULT_DEGRADE_RATIO =
+    public static final DataComponentType<Float> DEFAULT_DEGRADE_RATIO =
             Registry.register(
-                    Registries.DATA_COMPONENT_TYPE,
-                    Identifier.of("durability_minus", "default_degrade_ratio"),
-                    ComponentType.<Float>builder()
-                            .codec(Codec.FLOAT)
-                            .packetCodec(PacketCodecs.FLOAT)
+                    BuiltInRegistries.DATA_COMPONENT_TYPE,
+                    Identifier.fromNamespaceAndPath("durability_minus", "default_degrade_ratio"),
+                    DataComponentType.<Float>builder()
+                            .persistent(Codec.FLOAT)
+                            .networkSynchronized(ByteBufCodecs.FLOAT)
                             .build()
             );
-    public static final ComponentType<Float> PERFORMANCE_PENALTY_PERCENTAGE =
+    public static final DataComponentType<Float> PERFORMANCE_PENALTY_PERCENTAGE =
             Registry.register(
-                    Registries.DATA_COMPONENT_TYPE,
-                    Identifier.of("durability_minus", "performance_percentage"),
-                    ComponentType.<Float>builder()
-                            .codec(Codec.FLOAT)
-                            .packetCodec(PacketCodecs.FLOAT)
+                    BuiltInRegistries.DATA_COMPONENT_TYPE,
+                    Identifier.fromNamespaceAndPath("durability_minus", "performance_percentage"),
+                    DataComponentType.<Float>builder()
+                            .persistent(Codec.FLOAT)
+                            .networkSynchronized(ByteBufCodecs.FLOAT)
                             .build()
             );
-    public static final ComponentType<Integer> DEFAULT_MAX_DAMAGE =
+    public static final DataComponentType<Integer> DEFAULT_MAX_DAMAGE =
             Registry.register(
-                    Registries.DATA_COMPONENT_TYPE,
-                    Identifier.of("durability_minus","default_max_damage"),
-                    ComponentType.<Integer>builder()
-                            .codec(Codec.INT)
-                            .packetCodec(PacketCodecs.INTEGER)
+                    BuiltInRegistries.DATA_COMPONENT_TYPE,
+                    Identifier.fromNamespaceAndPath("durability_minus","default_max_damage"),
+                    DataComponentType.<Integer>builder()
+                            .persistent(Codec.INT)
+                            .networkSynchronized(ByteBufCodecs.INT)
                             .build()
             );
 

@@ -3,16 +3,16 @@
   "package": "com.sg.dminus.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ExperienceOrbEntityMixin",
+    "ExperienceOrbMixin",
     "ItemMixin",
     "ItemStackMixin",
-    "KineticWeaponComponentMixin",
+    "KineticWeaponMixin",
     "LivingEntityMixin",
-    "MobEntityMixin",
-    "PiercingWeaponComponentMixin",
-    "PlayerEntityMixin",
-    "RangedWeaponItemMixin",
-    "TridentEntityMixin"
+    "MobMixin",
+    "PiercingWeaponMixin",
+    "PlayerMixin",
+    "ProjectileWeaponItemMixin",
+    "ThrownTridentMixin"
   ],
   "injectors": {
     "defaultRequire": 1

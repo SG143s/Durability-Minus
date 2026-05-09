@@ -3,8 +3,8 @@ package com.sg.dminus.degrade_components;
 import com.sg.dminus.config.ConfigManager;
 import com.sg.dminus.degrade_data.DegradeRegistry;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.item.ItemStack;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.ItemStack;
 
 import static com.sg.dminus.degrade_components.DegradeDataComponents.DEFAULT_DEGRADE_RATIO;
 import static com.sg.dminus.degrade_components.DegradeDataComponents.DEGRADE_RATIO;
@@ -16,19 +16,19 @@ public class DegradeDataComponentApply {
                     context.modify(
                             item -> true,
                             (builder, item) -> {
-                                if (builder.contains(DataComponentTypes.MAX_DAMAGE)) {
+                                if (builder.contains(DataComponents.MAX_DAMAGE)) {
                                     if (!builder.contains(DEGRADE_RATIO)) {
-                                        builder.add(DEGRADE_RATIO, ConfigManager.get().defaultRatio);
+                                        builder.set(DEGRADE_RATIO, ConfigManager.get().defaultRatio);
                                     }
                                     if (!builder.contains(DEFAULT_DEGRADE_RATIO)) {
-                                        builder.add(DEFAULT_DEGRADE_RATIO, ConfigManager.get().defaultRatio);
+                                        builder.set(DEFAULT_DEGRADE_RATIO, ConfigManager.get().defaultRatio);
                                     }
                                     if (!builder.contains(DegradeDataComponents.PERFORMANCE_PENALTY_PERCENTAGE)) {
-                                        builder.add(DegradeDataComponents.PERFORMANCE_PENALTY_PERCENTAGE, 0f);
+                                        builder.set(DegradeDataComponents.PERFORMANCE_PENALTY_PERCENTAGE, 0f);
                                     }
                                     if (!builder.contains(DegradeDataComponents.DEFAULT_MAX_DAMAGE)) {
-                                        builder.add(DegradeDataComponents.DEFAULT_MAX_DAMAGE,
-                                                builder.getOrDefault(DataComponentTypes.MAX_DAMAGE, 100));
+                                        builder.set(DegradeDataComponents.DEFAULT_MAX_DAMAGE,
+                                                builder.getOrDefault(DataComponents.MAX_DAMAGE, 100));
                                     }
                                 }
                             }

@@ -1,9 +1,9 @@
 package com.sg.dminus.mixin;
 
 import com.sg.dminus.config.ConfigManager;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -21,7 +21,7 @@ import static com.sg.dminus.degrade_funcs.DegradeMath.PerformancePenaltyCalc;
 public class ItemMixin {
 
     @Inject(
-            method = "getMiningSpeed",
+            method = "getDestroySpeed",
             at = @At("RETURN"),
             cancellable = true
     )
@@ -30,7 +30,7 @@ public class ItemMixin {
             return;
         }
 
-        if (stack.isDamageable()) {
+        if (stack.isDamageableItem()) {
             float baseSpeed = cir.getReturnValue();
             if (baseSpeed > 1.0f) {
                 ensureInit(stack);

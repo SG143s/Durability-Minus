@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sg.dminus.degrade_data.data_model.GroupDataModel;
 import com.sg.dminus.degrade_data.data_model.SingleDataModel;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 
 public class DegradeCodec {
     public static final Codec<SingleDataModel> SingleCodec =

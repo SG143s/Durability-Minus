@@ -1,28 +1,28 @@
 package com.sg.dminus.degrade_funcs;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.Holder;
 
 public class DegradeGetValue {
     public static double getWeaponBase(ItemStack stack) {
         double weaponBase = 0.0;
-        AttributeModifiersComponent component = stack.get(DataComponentTypes.ATTRIBUTE_MODIFIERS);
+        ItemAttributeModifiers component = stack.get(DataComponents.ATTRIBUTE_MODIFIERS);
         if (component != null) {
             for (var entry : component.modifiers()) {
-                RegistryEntry<EntityAttribute> attribute = entry.attribute();
-                EntityAttributeModifier modifier = entry.modifier();
+                Holder<Attribute> attribute = entry.attribute();
+                AttributeModifier modifier = entry.modifier();
 
-                if (attribute.matchesKey(EntityAttributes.ATTACK_DAMAGE.getKey().get()) &&
-                entry.slot().matches(EquipmentSlot.MAINHAND)) {
-                    if (modifier.idMatches(Item.BASE_ATTACK_DAMAGE_MODIFIER_ID)) {
-                        weaponBase += modifier.value();
+                if (attribute.is(Attributes.ATTACK_DAMAGE.unwrapKey().get()) &&
+                entry.slot().test(EquipmentSlot.MAINHAND)) {
+                    if (modifier.is(Item.BASE_ATTACK_DAMAGE_ID)) {
+                        weaponBase += modifier.amount();
                     }
                 }
             }
@@ -34,19 +34,19 @@ public class DegradeGetValue {
     public static double getArmorBase(ItemStack stack, EquipmentSlot slot) {
         double armorBase = 0.0;
 
-        AttributeModifiersComponent component = stack.get(DataComponentTypes.ATTRIBUTE_MODIFIERS);
+        ItemAttributeModifiers component = stack.get(DataComponents.ATTRIBUTE_MODIFIERS);
         if (component == null) return 0.0;
 
         for (var entry : component.modifiers()) {
-            if (!entry.slot().matches(slot)) continue;
+            if (!entry.slot().test(slot)) continue;
 
             var attribute = entry.attribute();
             var modifier = entry.modifier();
 
-            if (!attribute.matchesKey(EntityAttributes.ARMOR.getKey().get())) continue;
-            if (modifier.operation() != EntityAttributeModifier.Operation.ADD_VALUE) continue;
+            if (!attribute.is(Attributes.ARMOR.unwrapKey().get())) continue;
+            if (modifier.operation() != AttributeModifier.Operation.ADD_VALUE) continue;
 
-            armorBase += modifier.value();
+            armorBase += modifier.amount();
         }
 
         return Math.max(0.0, armorBase);
@@ -55,19 +55,19 @@ public class DegradeGetValue {
     public static double getArmorToughBase(ItemStack stack, EquipmentSlot slot) {
         double armorBase = 0.0;
 
-        AttributeModifiersComponent component = stack.get(DataComponentTypes.ATTRIBUTE_MODIFIERS);
+        ItemAttributeModifiers component = stack.get(DataComponents.ATTRIBUTE_MODIFIERS);
         if (component == null) return 0.0;
 
         for (var entry : component.modifiers()) {
-            if (!entry.slot().matches(slot)) continue;
+            if (!entry.slot().test(slot)) continue;
 
             var attribute = entry.attribute();
             var modifier = entry.modifier();
 
-            if (!attribute.matchesKey(EntityAttributes.ARMOR_TOUGHNESS.getKey().get())) continue;
-            if (modifier.operation() != EntityAttributeModifier.Operation.ADD_VALUE) continue;
+            if (!attribute.is(Attributes.ARMOR_TOUGHNESS.unwrapKey().get())) continue;
+            if (modifier.operation() != AttributeModifier.Operation.ADD_VALUE) continue;
 
-            armorBase += modifier.value();
+            armorBase += modifier.amount();
         }
 
         return Math.max(0.0, armorBase);

@@ -2,10 +2,10 @@ package com.sg.dminus.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.sg.dminus.config.ConfigManager;
-import net.minecraft.component.type.KineticWeaponComponent;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.component.KineticWeapon;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -15,14 +15,14 @@ import static com.sg.dminus.degrade_funcs.DegradeMath.DegradeCalc;
 import static com.sg.dminus.degrade_funcs.DegradeMath.PerformancePenaltyCalc;
 
 
-@Mixin(KineticWeaponComponent.class)
-public class KineticWeaponComponentMixin {
+@Mixin(KineticWeapon.class)
+public class KineticWeaponMixin {
 
     @ModifyExpressionValue(
-            method = "usageTick",
+            method = "damageEntities",
             at = @At(
                     value = "FIELD",
-                    target = "Lnet/minecraft/component/type/KineticWeaponComponent;damageMultiplier:F")
+                    target = "Lnet/minecraft/world/item/component/KineticWeapon;damageMultiplier:F")
     )
     private float modifyMultiplier(float original, ItemStack stack, int remainingUseTicks, LivingEntity user, EquipmentSlot slot) {
         if(!ConfigManager.get().enableSpears) {

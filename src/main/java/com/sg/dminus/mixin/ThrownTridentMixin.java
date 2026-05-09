@@ -1,8 +1,8 @@
 package com.sg.dminus.mixin;
 
 import com.sg.dminus.config.ConfigManager;
-import net.minecraft.entity.projectile.TridentEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.projectile.arrow.ThrownTrident;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
@@ -12,19 +12,19 @@ import static com.sg.dminus.degrade_components.DegradeDataComponents.PERFORMANCE
 import static com.sg.dminus.degrade_funcs.DegradeMath.DegradeCalc;
 import static com.sg.dminus.degrade_funcs.DegradeMath.PerformancePenaltyCalc;
 
-@Mixin(TridentEntity.class)
-public abstract class TridentEntityMixin {
+@Mixin(ThrownTrident.class)
+public abstract class ThrownTridentMixin {
 
     @ModifyConstant(
-            method = "onEntityHit",
+            method = "onHitEntity",
             constant = @Constant(floatValue = 8.0f)
     )
     private float modifyBaseThrownTridentDamage(float original) {
         if(!ConfigManager.get().enableTrident) {
             return original;
         }
-        TridentEntity entity = (TridentEntity) (Object) this;
-        ItemStack stack = entity.getWeaponStack();
+        ThrownTrident entity = (ThrownTrident) (Object) this;
+        ItemStack stack = entity.getWeaponItem();
         ensureInit(stack);
         return DegradeCalc(stack.getOrDefault(PERFORMANCE_PENALTY_PERCENTAGE, PerformancePenaltyCalc(stack)), original, 1.0f);
     }

@@ -1,11 +1,11 @@
 package com.sg.dminus.mixin;
 
 import com.sg.dminus.config.ConfigManager;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.RangedWeaponItem;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Hand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
 import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,18 +19,18 @@ import static com.sg.dminus.degrade_funcs.DegradeMath.DegradeCalc;
 import static com.sg.dminus.degrade_funcs.DegradeMath.PerformancePenaltyCalc;
 
 
-@Mixin(RangedWeaponItem.class)
-public class RangedWeaponItemMixin {
+@Mixin(ProjectileWeaponItem.class)
+public class ProjectileWeaponItemMixin {
     @ModifyVariable(
-            method = "shootAll",
+            method = "shoot",
             at = @At("HEAD"),
             argsOnly = true,
             index = 6
     )
     private float modifyProjectileBaseSpeed(float original,
-                                            ServerWorld world,
+                                            ServerLevel world,
                                             LivingEntity shooter,
-                                            Hand hand,
+                                            InteractionHand hand,
                                             ItemStack stack,
                                             List<ItemStack> projectiles,
                                             float speed,

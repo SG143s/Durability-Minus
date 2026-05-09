@@ -9,9 +9,9 @@ import com.sg.dminus.degrade_components.DegradeDataComponents;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
-import net.minecraft.resource.ResourceType;
-import net.minecraft.resource.SynchronousResourceReloader;
-import net.minecraft.util.Identifier;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,19 +30,19 @@ public class DurabilityMinus implements ModInitializer {
 		// Proceed with mild caution.
 		DegradeDataComponents.init();
 		DegradeDataComponentApply.apply();
-		ResourceLoader.get(ResourceType.SERVER_DATA)
+		ResourceLoader.get(PackType.SERVER_DATA)
 				.registerReloader(
-						Identifier.of(MOD_ID, "clear_registry"),
-						(SynchronousResourceReloader) manager -> DegradeRegistry.clear()
+						Identifier.fromNamespaceAndPath(MOD_ID, "clear_registry"),
+						(ResourceManagerReloadListener) manager -> DegradeRegistry.clear()
 				);
-		ResourceLoader.get(ResourceType.SERVER_DATA)
+		ResourceLoader.get(PackType.SERVER_DATA)
 						.registerReloader(
-								Identifier.of(MOD_ID, "degrade_single_loader"),
+								Identifier.fromNamespaceAndPath(MOD_ID, "degrade_single_loader"),
 								new SingleDataLoader()
 						);
-		ResourceLoader.get(ResourceType.SERVER_DATA)
+		ResourceLoader.get(PackType.SERVER_DATA)
 						.registerReloader(
-								Identifier.of(MOD_ID, "degrade_group_loader"),
+								Identifier.fromNamespaceAndPath(MOD_ID, "degrade_group_loader"),
 								new GroupDataLoader()
 						);
 		ConfigManager.load();

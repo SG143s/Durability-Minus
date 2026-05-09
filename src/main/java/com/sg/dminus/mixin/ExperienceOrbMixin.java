@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ExperienceOrbEntity.class)
-public class ExperienceOrbEntityMixin {
+public class ExperienceOrbMixin {
     @Inject(at = @At("HEAD"), method = "repairPlayerGears", cancellable = true)
     private void PlayerLevelMending(ServerPlayerEntity player, int amount, CallbackInfoReturnable<Integer> cir) {
         if(!ConfigManager.get().enableHarderMending) {

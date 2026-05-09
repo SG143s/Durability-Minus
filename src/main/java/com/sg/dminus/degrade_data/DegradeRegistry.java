@@ -1,6 +1,6 @@
 package com.sg.dminus.degrade_data;
 
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 import java.util.HashMap;
 import java.util.Map;
