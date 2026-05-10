@@ -82,3 +82,7 @@ publishing {
 		// retrieving dependencies.
 	}
 }
+
+base {
+	archivesName = "${archives_base_name}-1.21.11"
+}
