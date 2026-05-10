@@ -79,3 +79,7 @@ publishing {
 		// retrieving dependencies.
 	}
 }
+
+base {
+	archivesName = "${archives_base_name}-26.1.x"
+}
