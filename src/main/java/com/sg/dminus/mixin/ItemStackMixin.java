@@ -45,7 +45,7 @@ public abstract class ItemStackMixin {
     // TODO(Ravel): wildcard and regex target are not supported
 // TODO(Ravel): wildcard and regex target are not supported
     @Inject(
-            method = "damage*",
+            method = "hurtAndBreak(ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;)V",
             at = @At("HEAD")
     )
     private void RatioInit(int amount, LivingEntity entity, EquipmentSlot slot, CallbackInfo ci) {
